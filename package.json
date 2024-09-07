@@ -1,9 +1,9 @@
 {
   "name": "@warren-bank/hls-proxy",
   "description": "Node.js server to proxy HLS video streams",
-  "version":     "3.5.4",
+  "version": "3.5.4",
   "scripts": {
-    "start":     "node hls-proxy/bin/hlsd.js",
+    "start": "node hls-proxy/bin/hlsd.js",
     "sudo": "sudo node hls-proxy/bin/hlsd.js"
   },
   "bin": {
@@ -13,22 +13,33 @@
     "@warren-bank/node-process-argv": "^1.2.1",
     "@warren-bank/node-request": "^2.0.12",
     "@warren-bank/url": "^3.1.2",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "hpagent": "^1.2.0",
+    "mysql2": "^3.11.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.15",
+    "redis": "^4.7.0",
     "regexp-match-indices": "^1.0.2",
-    "tough-cookie": "^3.0.1"
+    "request": "^2.88.2",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "tough-cookie": "^3.0.1",
+    "util": "^0.12.5"
   },
   "license": "GPL-2.0",
   "author": {
-    "name":   "Warren R. Bank",
-    "email":  "warren.r.bank@gmail.com",
-    "url":    "https://github.com/warren-bank"
+    "name": "Warren R. Bank",
+    "email": "warren.r.bank@gmail.com",
+    "url": "https://github.com/warren-bank"
   },
   "homepage": "https://github.com/warren-bank/HLS-Proxy",
   "repository": {
-    "type":   "git",
-    "url":    "https://github.com/warren-bank/HLS-Proxy"
+    "type": "git",
+    "url": "https://github.com/warren-bank/HLS-Proxy"
   },
   "bugs": {
-    "url":    "https://github.com/warren-bank/HLS-Proxy/issues"
+    "url": "https://github.com/warren-bank/HLS-Proxy/issues"
   }
 }
