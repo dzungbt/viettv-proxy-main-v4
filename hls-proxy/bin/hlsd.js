@@ -99,7 +99,7 @@ if (middleware.request){
           }
         }
         console.log(username, " - ", password);
-        if ((username == null || username == 'null') && 
+        if ((username == null || username == 'null') || 
             (password == null || password == 'null')
         ) {
           middleware.request(req, res);

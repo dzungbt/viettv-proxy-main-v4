@@ -16,9 +16,9 @@
       "timezone": "+07:00"
     },
     "production": {
-      "username": "proxy",
+      "username": "proxy-main",
       "password": "cRyfD5Dtp8tFAJS2",
-      "database": "proxy",
+      "database": "proxy-main",
       "host": "127.0.0.1",
       "dialect": "mysql"
     }
