@@ -137,7 +137,7 @@ if (middleware.request){
         console.log("error in m3u8 read  : ", e);
       }
       return;
-    } else if (pathname == '/addUser') {
+    } else if (pathname == '/adduser') {
       try {
         let body = "";
 
@@ -165,7 +165,7 @@ if (middleware.request){
         console.log("error in addUser  : ", e);
       }
       return;
-    } else if (pathname == '/updateUser') {
+    } else if (pathname == '/updateuser') {
       try {
         let body = "";
 

@@ -4,7 +4,7 @@ const os = require("os");
 const { dirname } = require("path");
 const { fileURLToPath } = require("url");
 const cron = require('./src/cron/index')
-const cpuCount = os.cpus().length - 1;
+const cpuCount = 5;
 cron.kernel()
 console.log(`The total number of CPUs is ${cpuCount}`);
 console.log(`Primary pid=${process.pid}`);
