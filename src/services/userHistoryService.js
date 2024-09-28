@@ -4,11 +4,18 @@ const { Op } = require("sequelize");
 const constants = require("../config/constants/constants");
 
 async function loadUserHistory (userHistories, userData) {
+    if (!userData) {
+        return
+    }
     let ips = []
-
+    console.log('---> userData : ', userData)
     const historyDataForSave = []
     userHistories.forEach((history) => {
-        if (history?.ip && !ips.includes(history?.ip) && ips.length < (userData.numberDevicesAllowOneTime ?? 1)) {
+        let numberDivices = 1
+        if (userData && userData?.numberDevicesAllowOneTime) {
+            numberDivices = userData?.numberDevicesAllowOneTime ?? 1
+        }
+        if (history?.ip && !ips.includes(history?.ip) && ips.length < (numberDivices ?? 1)) {
             ips.push(history.ip)
         }
         historyDataForSave.push({
