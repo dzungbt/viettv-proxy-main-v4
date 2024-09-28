@@ -8,7 +8,6 @@ async function loadUserHistory (userHistories, userData) {
         return
     }
     let ips = []
-    console.log('---> userData : ', userData)
     const historyDataForSave = []
     userHistories.forEach((history) => {
         let numberDivices = 1
