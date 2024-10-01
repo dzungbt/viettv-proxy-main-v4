@@ -4,8 +4,15 @@ const os = require("os");
 const { dirname } = require("path");
 const { fileURLToPath } = require("url");
 const cron = require('./src/cron/index')
-const cpuCount = 4;
-cron.kernel()
+const {Redis} = require('./src/redis/redis')
+const redisClient = new Redis
+redisClient.clearClient()
+
+const cpuCount = process.env.CLUSTER_PROCESS ?? 2;
+const isCronNode = JSON.parse(process.env.IS_CRON_NODE ?? 0);
+if (isCronNode == 1) {
+  cron.kernel()
+}
 console.log(`The total number of CPUs is ${cpuCount}`);
 console.log(`Primary pid=${process.pid}`);
 cluster.setupPrimary({

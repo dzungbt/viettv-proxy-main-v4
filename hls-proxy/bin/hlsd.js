@@ -13,6 +13,15 @@ const redis = require("../../src/redis/redis.js");
 const { addNewUserHistory } = require('../../src/helpers/index.js')
 const auth = require("../../src/auth.js");
 const { allowWatching } = require('../../src/services/userHistoryService.js')
+const cron = require('../../src/cron/index.js')
+
+const redisClient = new Redis
+redisClient.clearClient()
+const isCronNode = JSON.parse(process.env.IS_CRON_NODE ?? 0);
+if (isCronNode == 1) {
+  cron.kernel()
+}
+
 
 const argv_vals = require('./lib/process_argv')
 
