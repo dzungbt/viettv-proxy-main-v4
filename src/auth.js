@@ -7,16 +7,22 @@ const auth = async (username, password) => {
     const redisClient = new Redis
     const users = await redisClient.get('usersData')
     redisClient.clearClient()
-    let usersJson = JSON.parse(users)
+    console.log('users raw: ', users)
+
+    if (!users?.data) {
+      console.log('not found userData : ')
+      return null
+    }
+    let usersJson = JSON.parse(users?.data)
     const user = usersJson.find((user) => user.username == username && user.password == password)
     console.log('user found : ', user);
-    // console.log('constants found : ', constants.USER_ACTIVE);
 
     if (user) {
       return user;
     }
     return null;
-  } catch {
+  } catch (e) {
+    console.log('error in auth : ', e)
     return null;
   }
 };
