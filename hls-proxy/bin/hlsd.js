@@ -231,9 +231,11 @@ if (middleware.request){
       const index = process.env.LB_INDEX ?? 1
       res.end('OK' + index);
     } else {
+        middleware.request(req, res);
+
       // Xử lý các request khác ở đây
-      res.writeHead(404);
-      res.end('Not Found');
+    //   res.writeHead(404);
+    //   res.end('Not Found');
     }
   });
 }

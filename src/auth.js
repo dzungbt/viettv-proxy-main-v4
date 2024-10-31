@@ -7,7 +7,6 @@ const auth = async (username, password) => {
     const redisClient = new Redis
     const users = await redisClient.get('usersData')
     redisClient.clearClient()
-    console.log('users raw: ', users)
 
     if (!users?.data) {
       console.log('not found userData : ')
