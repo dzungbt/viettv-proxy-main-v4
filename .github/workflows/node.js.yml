@@ -21,11 +21,13 @@ jobs:
       REDIS_PORT: ${{secrets.PROXY_MAIN_V4_REDIS_PORT}}
       REDIS_HOST: ${{secrets.PROXY_MAIN_V4_REDIS_HOST}}
     steps:
-    # - name: Copy config file to temp folder
-    #   run: cp /www/wwwroot/runners/scan_kiz_be/scan_kiz_backend/scan_kiz_backend/config/config.json /project/temp/scan_kiz_back/config.json
+    - name: Copy config file to temp folder
+      run: cp /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json /project/temp/viettv-proxy-main-v4/config.json
     - uses: actions/checkout@v3
       with:
         ref: 'master'
+    - name: Restore config file from temp folder
+      run: cp /project/temp/viettv-proxy-main-v4/config.json /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json 
 
     - name: Create .env file
       run: echo "NODE_ENV=production" > .env
@@ -43,7 +45,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm i --init-module
-  
+    - name: Migrate to database
+      run: npx sequelize-cli db:migrate --env=production
   deploy_de:
     needs: build_de
     runs-on: [self-hosted, proxy-main-v4-de]
