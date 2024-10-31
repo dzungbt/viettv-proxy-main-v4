@@ -32,11 +32,11 @@ jobs:
     - name: Create .env file
       run: echo "NODE_ENV=production" > .env
     - name: Update VIET_TV_SERVER_URL
-      run: echo "VIET_TV_SERVER_URL=${{secrets.PROXY_MAIN_V4_SERVER_URL}}" > .env
+      run: echo "VIET_TV_SERVER_URL=${{secrets.PROXY_MAIN_V4_SERVER_URL}}" >> .env
     - name: Update REDIS_PORT
-      run: echo "REDIS_PORT=${{secrets.PROXY_MAIN_V4_REDIS_PORT}}" > .env
+      run: echo "REDIS_PORT=${{secrets.PROXY_MAIN_V4_REDIS_PORT}}" >> .env
     - name: Update REDIS_HOST
-      run: echo "REDIS_HOST=${{secrets.PROXY_MAIN_V4_REDIS_HOST}}" > .env
+      run: echo "REDIS_HOST=${{secrets.PROXY_MAIN_V4_REDIS_HOST}}" >> .env
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
