@@ -14,10 +14,10 @@ const { addNewUserHistory } = require('../../src/helpers/index.js')
 const auth = require("../../src/auth.js");
 const { allowWatching } = require('../../src/services/userHistoryService.js')
 const cron = require('../../src/cron/index.js')
-
+const {getStartCommandParams} = require('../../helpers.js')
 const redisClient = new Redis
 redisClient.clearClient()
-const isCronNode = JSON.parse(process.env.IS_CRON_NODE ?? 0);
+const isCronNode = JSON.parse(getStartCommandParams('isCronNode') || 0);
 if (isCronNode == 1) {
   cron.kernel()
 }
@@ -228,7 +228,7 @@ if (middleware.request){
       return;
     } else if (pathname == '/cdn/ping') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
-      const index = process.env.LB_INDEX ?? 1
+      const index = getStartCommandParams('lbindex') || 1
       res.end('OK' + index);
     } else {
         middleware.request(req, res);

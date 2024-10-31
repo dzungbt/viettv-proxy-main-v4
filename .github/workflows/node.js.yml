@@ -8,24 +8,58 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  build_de:
+    runs-on: [self-hosted, proxy-main-v4-de]
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    env:
+      NODE_ENV: production
+      VIET_TV_SERVER_URL: ${{secrets.PROXY_MAIN_V4_SERVER_URL}}
+      REDIS_PORT: ${{secrets.PROXY_MAIN_V4_REDIS_PORT}}
+      REDIS_HOST: ${{secrets.PROXY_MAIN_V4_REDIS_HOST}}
     steps:
-    - uses: actions/checkout@v4
+    # - name: Copy config file to temp folder
+    #   run: cp /www/wwwroot/runners/scan_kiz_be/scan_kiz_backend/scan_kiz_backend/config/config.json /project/temp/scan_kiz_back/config.json
+    - uses: actions/checkout@v3
+      with:
+        ref: 'master'
+
+    - name: Create .env file
+      run: echo "NODE_ENV=production" > .env
+    - name: Update VIET_TV_SERVER_URL
+      run: echo "VIET_TV_SERVER_URL=${{secrets.PROXY_MAIN_V4_SERVER_URL}}" > .env
+    - name: Update REDIS_PORT
+      run: echo "REDIS_PORT=${{secrets.PROXY_MAIN_V4_REDIS_PORT}}" > .env
+    - name: Update REDIS_HOST
+      run: echo "REDIS_HOST=${{secrets.PROXY_MAIN_V4_REDIS_HOST}}" > .env
+
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm i --init-module
+  
+  deploy_de:
+    needs: build_de
+    runs-on: [self-hosted, proxy-main-v4-de]
+    steps:
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v1.1.0
+      continue-on-error: true
+      with:
+
+        host: ${{ secrets.PROXY_MAIN_V4_HOST }}
+        username: ${{ secrets.PROXY_MAIN_V4_USERNAME }}
+        password: ${{ secrets.PROXY_MAIN_V4_PW }}
+        port: ${{ secrets.PROXY_MAIN_V4_PORT }}
+        command_timeout: 10s
+        script: |
+          bash ${{ secrets.PROXY_MAIN_V4_EXECUTE_PATH }}/.github/workflows/reexecute.sh
+          echo 'Deploy de done'
+          exit
+

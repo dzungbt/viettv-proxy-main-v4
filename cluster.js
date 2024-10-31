@@ -6,10 +6,12 @@ const { fileURLToPath } = require("url");
 const cron = require('./src/cron/index')
 const {Redis} = require('./src/redis/redis')
 const redisClient = new Redis
+const {getStartCommandParams} = require('../../helpers.js')
+
 redisClient.clearClient()
 
 const cpuCount = process.env.CLUSTER_PROCESS ?? 2;
-const isCronNode = JSON.parse(process.env.IS_CRON_NODE ?? 0);
+const isCronNode = JSON.parse(getStartCommandParams('isCronNode') || 0);
 if (isCronNode == 1) {
   cron.kernel()
 }

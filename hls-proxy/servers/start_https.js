@@ -1,10 +1,11 @@
 const https = require('https')
 const fs    = require('fs')
 const process = require("process");
+const {getStartCommandParams} = require('../../helpers')
 
 const start_server = function({port, tls_cert, tls_key, tls_pass}) {
   if (!port || isNaN(port)) port = 443
-  port = process.env.PORT || port
+  port = getStartCommandParams('sysport') || port
 
   const ssl_options = (tls_cert && tls_key)
     ? {
