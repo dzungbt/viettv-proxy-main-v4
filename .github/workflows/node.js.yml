@@ -47,6 +47,7 @@ jobs:
     - run: npm i --init-module
     - name: Migrate to database
       run: npx sequelize-cli db:migrate --env=production
+      
   deploy_de:
     needs: build_de
     runs-on: [self-hosted, proxy-main-v4-de]
