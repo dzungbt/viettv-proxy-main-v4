@@ -229,7 +229,7 @@ if (middleware.request){
     } else if (pathname == '/cdn/ping') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       const index = getStartCommandParams('lbindex') || 1
-      res.end('OK' + index);
+      res.end('OK proxy main ' + index);
     } else {
         middleware.request(req, res);
 

@@ -4,16 +4,14 @@ ports=(
   6010
   6020
   6030
-  7010
-  7020
-  7030
+  6090
 )
 
 processes=(
   "proxy_main_1"
   "proxy_main_2"
   "proxy_main_3"
-
+  "proxy_main_cron"
 )
 
 for port in "${ports[@]}"

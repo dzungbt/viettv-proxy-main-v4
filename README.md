@@ -1,3 +1,9 @@
+********DEPLOY PROJECT **********
+
+npm start sysport=6010 isCronNode=0 lbindex=1
+
+
+
 ### [_HLS Proxy_](https://github.com/warren-bank/HLS-Proxy) : HTTP Live Streaming Proxy
 
 #### Basic Functionality:
