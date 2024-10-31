@@ -55,7 +55,6 @@ jobs:
       uses: appleboy/ssh-action@v1.1.0
       continue-on-error: true
       with:
-
         host: ${{ secrets.PROXY_MAIN_V4_HOST }}
         username: ${{ secrets.PROXY_MAIN_V4_USERNAME }}
         password: ${{ secrets.PROXY_MAIN_V4_PW }}
