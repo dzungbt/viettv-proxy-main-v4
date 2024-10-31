@@ -1,7 +1,5 @@
 const expressjs = require('./expressjs_utils')
 const parse_url = require('./url').parse
-var aesEcb = require('aes-ecb');
-require("dotenv").config();
 
 const regexs = {
   req_url: new RegExp('^(.*?)/([a-zA-Z0-9\\+/=%]+)(?:[\\._]([^/\\?#]*))?(?:[\\?#].*)?$'),
@@ -10,24 +8,12 @@ const regexs = {
 
 // btoa
 const base64_encode = function(str) {
-  // return Buffer.from(str, 'binary').toString('base64')
-  try {
-    return aesEcb.encrypt(process.env.TOKEN, str);
- } catch (e) {
-   console.log('base 64 encode error : ', str)
-    return Buffer.from(str, 'binary').toString('base64')
- }
+  return Buffer.from(str, 'binary').toString('base64')
 }
 
 // atob
 const base64_decode = function(str) {
-  // return Buffer.from(str, 'base64').toString('binary')
-  try {
-    return aesEcb.decrypt( process.env.TOKEN, str);
-  } catch (e) {
-      console.log('base 64 decode error : ', str)
-      return Buffer.from(str, 'base64').toString('binary')
-  }
+  return Buffer.from(str, 'base64').toString('binary')
 }
 
 const parse_req_url = function(params, req) {
