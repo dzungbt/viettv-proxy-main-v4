@@ -122,7 +122,6 @@ if (middleware.request){
         //   middleware.request(req, res);
         //   return;
         // }
-
         if (userData) {
           const allowWatchingVal = await allowWatching(currentIp, userData)
           console.log('check allow watching : ', allowWatchingVal, '--> current ip : ', currentIp)
