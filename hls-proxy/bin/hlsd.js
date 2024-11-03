@@ -111,25 +111,17 @@ if (middleware.request){
         if ((username == null || username == 'null') || 
             (password == null || password == 'null')
         ) {
-          if (password == 'dfL') {
-            middleware.request(req, res);
-            return;
-          } else {
-            console.log('user reject cause on maintain : ', username)
-            req.url = '/aHR0cDovLzEwMy43Mi45Ny4xODQ6NTAwNS92aWRlby9zZXJ2aWNlX29uX21haW50YWluLnRz'
-            middleware.request(req, res);
-            return;
-          }
-          
-        }
-        let userData = await auth(username, password);
-        if (userData && username != 'zBUV') {
-          // http://103.72.97.184:5005/video/service_on_maintain.ts
-          console.log('user reject cause on maintain : ', username)
-          req.url = '/aHR0cDovLzEwMy43Mi45Ny4xODQ6NTAwNS92aWRlby9zZXJ2aWNlX29uX21haW50YWluLnRz'
           middleware.request(req, res);
           return;
         }
+        let userData = await auth(username, password);
+        // if (userData && username != 'zBUV') {
+        //   // http://103.72.97.184:5005/video/service_on_maintain.ts
+        //   console.log('user reject cause on maintain : ', username)
+        //   req.url = '/aHR0cDovLzEwMy43Mi45Ny4xODQ6NTAwNS92aWRlby9zZXJ2aWNlX29uX21haW50YWluLnRz'
+        //   middleware.request(req, res);
+        //   return;
+        // }
 
         if (userData) {
           const allowWatchingVal = await allowWatching(currentIp, userData)
