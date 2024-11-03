@@ -37,7 +37,7 @@ const parse_req_url = function(params, req) {
     }
 
     let url, url_lc, index
-
+    console.log('check url : ', decodeURIComponent( matches[2] ), '---> check after decode : ', base64_decode( decodeURIComponent( matches[2] ) ))
     url    = base64_decode( decodeURIComponent( matches[2] ) ).trim()
     url_lc = url.toLowerCase()
     index  = url_lc.indexOf('http')
