@@ -21,13 +21,13 @@ jobs:
       REDIS_PORT: ${{secrets.PROXY_MAIN_V4_REDIS_PORT}}
       REDIS_HOST: ${{secrets.PROXY_MAIN_V4_REDIS_HOST}}
     steps:
-    - name: Copy config file to temp folder
-      run: cp /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json /project/temp/viettv-proxy-main-v4/config.json
+    # - name: Copy config file to temp folder
+    #   run: cp /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json /project/temp/viettv-proxy-main-v4/config.json
     - uses: actions/checkout@v3
       with:
         ref: 'master'
-    - name: Restore config file from temp folder
-      run: cp /project/temp/viettv-proxy-main-v4/config.json /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json 
+    # - name: Restore config file from temp folder
+    #   run: cp /project/temp/viettv-proxy-main-v4/config.json /www/wwwroot/runners/proxy-main/viettv-proxy-main-v4/viettv-proxy-main-v4/config/config.json 
 
     - name: Create .env file
       run: echo "NODE_ENV=production" > .env
