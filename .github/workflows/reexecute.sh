@@ -7,6 +7,7 @@ ports=(
   6090
 )
 
+
 processes=(
   "proxy_main_1"
   "proxy_main_2"
