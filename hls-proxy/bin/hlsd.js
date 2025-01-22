@@ -141,6 +141,34 @@ if (middleware.request){
               }
             }
           }
+          if (process.env.VERSION == '2') {
+            const url = req.url
+            const pathUrl = url.split('/').at(-1)
+            if (!pathUrl || pathUrl.length == 0) {
+              console.log('----> VERSION 2 : not found path url')
+              middleware.request(req, res);
+              return;
+            }
+            const channelToken = pathUrl.split('.m3u8').at(0)
+            if (!channelToken || channelToken.length == 0) {
+              console.log('----> VERSION 2 : not found token')
+              middleware.request(req, res);
+              return;
+            }
+            const channelUrl = atob(channelToken)
+            if (!channelUrl || channelUrl.length == 0) {
+              console.log('----> VERSION 2 : not found channel raw')
+              middleware.request(req, res);
+              return;
+            }
+            console.log('----> VERSION 2 : OKE : ', channelUrl)
+            // req.redirect(channelUrl)
+            res.writeHead(302, {
+              'Location': channelUrl
+            });
+            res.end();
+            return
+          }
           middleware.request(req, res);
         } else {
           // http://103.72.97.184:5005/video/url_invalid.ts
