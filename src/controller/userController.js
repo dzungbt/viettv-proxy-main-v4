@@ -44,11 +44,11 @@ const addUser = async (userData) => {
 const updateUser = async (userData) => {
     let dataResponse = {};
     try {
-        let checkUserExisted = await db.users.findOne({ where: { mainUserId: userData.id } });
+        let checkUserExisted = await db.users.findOne({ where: { username: userData.username } });
         if (checkUserExisted) {
             checkUserExisted.update({
                 name: userData.name,
-                username: userData.username,
+                mainUserId: userData.id,
                 password: userData.password,
                 email: userData.email,
                 active: userData.active,
